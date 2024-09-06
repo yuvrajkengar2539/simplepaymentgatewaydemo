@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />   
+<title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+
+        }
+        .outer-box{
+            
+            width: 350px;
+            background-color: white;
+            margin-top: 50px;
+            margin-bottom: 100px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid rgb(97, 97, 97);
+            border-radius: 8px;
+        }
+        .outer-box p{
+            padding: 10px;
+            font-family: "Poppins", sans-serif;
+        }
+        header{
+            padding: 15px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        header h2{
+            color: rgb(0, 0, 0);
+            font-family: "Poppins", sans-serif;
+           
+        }
+        .box1{
+            
+            background-color:rgb(70, 88, 255);
+            padding: 10px;
+        }
+        .box1 h3{
+            font-family: "Poppins", sans-serif;
+           color: white;
+        }
+        .payopt{
+
+            border-radius: 5px;
+            margin: 10px;
+            margin-bottom: 20px;
+        }
+        .box2{
+            
+            margin-bottom: 6px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+       
+        .box2 input{
+            font-family: "Poppins", sans-serif;
+            cursor: pointer;
+            width: 95%;
+            height: 40px;
+            padding-right: 10px;
+            margin-bottom:10px;
+        }
+
+        .box2 input:hover{
+            border: 2px solid rgb(3, 49, 255);
+        }
+
+        button{
+            color: white;
+            background-color:rgb(3, 49, 255);
+            width: 100%;
+            height: 50px;
+            margin-top: 10px;
+            font-family: "Poppins", sans-serif;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover{
+            background-color:rgba(3, 49, 255, 0.897);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>GateWay</h2>
+        
+    </header>
+    <div class="outer-box">
+        <div class="box1">
+            <h3>GateWay Payments</h3>
+        </div>
+        <p>Enter Receiver's Bank Details</p>
+        <div class="payopt">
+            
+            <div class="box2">
+                <input type="text" name="bankname" id="bankname" placeholder="Enter Bank Name">
+                <input type="text" name="accname" id="accname" placeholder="Enter Account Holder's Name">
+            <input type="number" name="accno" id="accno" placeholder="Enter Account Number">    
+            <input type="text" name="ifsc" id="ifsc" placeholder="Enter IFSC Code">
+            </div>
+            <button onclick="payment()">Proceed</button>
+        </div>
+
+    </div>
+
+    <script>
+        function payment() {
+            const bankname = document.getElementById('bankname').value.trim();
+            const accname = document.getElementById('accname').value.trim();
+            const accno = document.getElementById('accno').value.trim();
+            const ifsc = document.getElementById('ifsc').value.trim();
+
+            if (bankname === '' || accname === '' || accno === '' || ifsc === '') {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            if (accno.length < 10 || accno.length > 16) {
+                alert('Account Number should be between 10 and 16 digits.');
+                return;
+            }
+
+            if (!/^[A-Za-z]{4}\d{7}$/.test(ifsc)) {
+                alert('IFSC Code format is incorrect.');
+                return;
+            }
+
+            // Redirect to the next page if all validations pass
+            window.location.href = 'paymentrequest.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />   
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .outer-box{
+            width: 350px;
+            background-color: white;
+            margin-top: 50px;
+            margin-bottom: 100px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid rgb(97, 97, 97);
+            border-radius: 8px;
+        }
+        .outer-box p{
+            padding: 10px;
+            font-family: "Poppins", sans-serif;
+        }
+        header{
+            padding: 15px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        header h2{
+            color: rgb(0, 0, 0);
+            font-family: "Poppins", sans-serif;
+        }
+        .box1{
+            background-color:rgb(70, 88, 255);
+            padding: 10px;
+        }
+        .box1 h3{
+            font-family: "Poppins", sans-serif;
+            color: white;
+        }
+        .payopt{
+            border-radius: 5px;
+            margin: 10px;
+            margin-bottom: 20px;
+        }
+        .box2{
+            font-family: "Poppins", sans-serif;
+            margin-bottom: 6px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .box2 select, .box2 input{
+            font-family: "Poppins", sans-serif;
+            cursor: pointer;
+            width: 100%;
+            height: 40px;
+        }
+        .box2 input{
+            width: 95%;
+            padding-right: 10px;
+        }
+        .box2:hover{
+            border: 2px solid rgb(3, 49, 255);
+        }
+        .box2 p i{
+            margin-right: 20px;
+        }
+        .payopt1{
+            display:flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        .payopt1 input{
+            padding: 10px;
+            margin: 2px;
+            width: 80%;
+        }
+        button{
+            color: white;
+            background-color:rgb(3, 49, 255);
+            width: 100%;
+            height: 50px;
+            margin-top: 10px;
+            font-family: "Poppins", sans-serif;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover{
+            background-color:rgba(3, 49, 255, 0.897);
+        }
+        .details input:hover{
+            border: 2px solid rgb(3, 49, 255);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>GateWay</h2>
+    </header>
+    <div class="outer-box">
+        <div class="box1">
+            <h3>GateWay Payments</h3>
+        </div>
+        <p>Enter Card Details</p>
+        <div class="payopt">
+            <div class="box2">
+                <select name="Cards" id="Cards">
+                    <option value="">Select Card</option>
+                    <option value="Visa">Visa</option>
+                    <option value="Rupay">Rupay</option>
+                </select>
+            </div>
+            <div class="box2">
+                <input type="text" name="cardnumber" id="cardnumber" placeholder="Enter Your Card Number" maxlength="16">
+            </div>
+            <div class="payopt1">
+                <div class="details">
+                    <input type="text" name="date" id="expiry" placeholder="MM/YY" maxlength="5">
+                </div>
+                <div class="details">
+                    <input type="text" name="CVV" id="cvv" placeholder="CVV" maxlength="3">
+                </div>
+            </div>
+            <button onclick="payment()">Proceed</button>
+            <p id="error-message" style="color: red; display: none;"></p>
+        </div>
+    </div>
+
+    <script>
+        function payment() {
+            const cardType = document.getElementById('Cards').value;
+            const cardNumber = document.getElementById('cardnumber').value;
+            const expiry = document.getElementById('expiry').value;
+            const cvv = document.getElementById('cvv').value;
+            const errorMessage = document.getElementById('error-message');
+
+            // Basic validations
+            if (cardType === "") {
+                errorMessage.textContent = "Please select a card type.";
+                errorMessage.style.display = "block";
+                return false;
+            }
+
+            if (cardNumber.length !== 16 || isNaN(cardNumber)) {
+                errorMessage.textContent = "Please enter a valid 16-digit card number.";
+                errorMessage.style.display = "block";
+                return false;
+            }
+
+            const expiryPattern = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/;
+            if (!expiryPattern.test(expiry)) {
+                errorMessage.textContent = "Please enter a valid expiry date in MM/YY format.";
+                errorMessage.style.display = "block";
+                return false;
+            }
+
+            if (cvv.length !== 3 || isNaN(cvv)) {
+                errorMessage.textContent = "Please enter a valid 3-digit CVV.";
+                errorMessage.style.display = "block";
+                return false;
+            }
+
+            // If all validations pass, proceed to the next page
+            errorMessage.style.display = "none";
+            window.location.href = "paymentrequest.html"; // Replace with your next page URL
+        }
+    </script>
+</body>
+</html>
